@@ -37,3 +37,6 @@
 ### 5. Funcionalidades
 - O sistema deve permitir **todas as operações CRUD (Create, Read, Update, Delete)** para os módulos disponíveis a cada usuário, de acordo com seu tipo de acesso.  
 
+### Referência de Layout
+https://www.figma.com/design/6f9Zh1gWVbjQ5lWGcUPUNR/Untitled?node-id=83-2&t=Rvh2pze3RIMyJdES-1
+
