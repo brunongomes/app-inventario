@@ -1,0 +1,15 @@
+<mat-form-field>
+    <input matInput [(ngModel)]="itemName" placeholder="Nome">
+</mat-form-field>
+<mat-form-field>
+    <input matInput [(ngModel)]="itemAmount" type="number" placeholder="Quantidade">
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Descrição</mat-label>
+    <textarea matInput [(ngModel)]="itemDescription" placeholder="Descrição"></textarea>
+</mat-form-field>
+
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="onSave()">Salvar</button>
+    <button mat-button mat-dialog-close cdkFocusInitial>Excluir</button>
+</mat-dialog-actions>

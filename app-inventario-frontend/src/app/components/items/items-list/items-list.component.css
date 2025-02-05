@@ -1,0 +1,15 @@
+.container {
+    position: relative;
+    padding-top: 30px;
+}
+
+.add-button {
+    background-color: rgb(77, 77, 207);
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    position: absolute;
+    right: 30px;
+}

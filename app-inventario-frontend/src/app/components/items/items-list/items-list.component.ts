@@ -4,23 +4,26 @@ import { MatTableModule } from '@angular/material/table';
 import { ItemsService } from '../../../services/items.service';
 import { Items } from '../../../@types/items';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ItemsModalComponent } from '../items-modal/items-modal.component';
 
 @Component({
   selector: 'app-items-list',
   standalone: true,
   imports: [
     MenuComponent,
-    MatTableModule
+    MatTableModule,
+    ItemsModalComponent
   ],
   templateUrl: './items-list.component.html',
   styleUrl: './items-list.component.css'
 })
 export class ItemsListComponent {
-  displayedColumns: string[] = ['id', 'name', 'amount'];
+  displayedColumns: string[] = ['name', 'amount'];
   dataSource: Items[] = [];
 
 
-  constructor(private itemsService: ItemsService, private router: Router) { }
+  constructor(private itemsService: ItemsService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit() {
     const token = localStorage.getItem('authToken');
@@ -29,18 +32,36 @@ export class ItemsListComponent {
       this.router.navigate(['/login']);
     }
 
+    this.loadItems();
+  };
+
+  loadItems() {
     this.itemsService.getItems().subscribe(items => {
-      console.log(items);
-      if (!items) {
-        return;
-      }
       this.dataSource = items.map(item => {
         return {
           id: item._id,
-          name: item.descricao,
+          name: item.nome,
           amount: item.quantidade
         };
-      })
+      });
+    });
+  }
+
+  openAddItemDialog() {
+    const dialogRef = this.dialog.open(ItemsModalComponent, {
+      width: '500px',
+      data: {}
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('==>', result);
+      if (!result) {
+        return;
+      }
+
+      this.itemsService.createItem(result).subscribe(() => {
+        this.loadItems();
+      });
     });
   }
 }
