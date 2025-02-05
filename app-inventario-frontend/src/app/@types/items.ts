@@ -3,6 +3,7 @@ export interface Items {
     id?: number;
     name: string;
     amount: number;
+    description: string;
 }
 
 export interface IItemsResponse {
