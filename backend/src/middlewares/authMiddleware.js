@@ -3,16 +3,16 @@ require('dotenv').config();
 
 const authMiddleware = (tipoPermitido) => {
     return (req, res, next) => {
-        // const token = req.header('Authorization');
-        // if (!token) return res.status(401).json({ msg: 'Acesso negado!' });
+        const token = req.header('Authorization');
+        if (!token) return res.status(401).json({ msg: 'Acesso negado!' });
 
         try {
-            // const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            // req.user = decoded;
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            req.user = decoded;
 
-            // if (!tipoPermitido.includes(req.user.tipo)) {
-            //     return res.status(403).json({ msg: 'Sem permissão!' });
-            // }
+            if (!tipoPermitido.includes(req.user.tipo)) {
+                return res.status(403).json({ msg: 'Sem permissão!' });
+            }
 
             next();
         } catch (error) {
