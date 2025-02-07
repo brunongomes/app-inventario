@@ -20,10 +20,12 @@ export class ItemsService {
   }
 
   updateItem(item: Items): Observable<Items> {
-    return this.http.put<Items>(this.API, item);
+    const id = item.id;
+    delete item.id
+    return this.http.put<Items>(`${this.API}/${id}`, item);
   }
 
   deleteItem(id: Items): Observable<Items> {
-    return this.http.delete<Items>(this.API + '/' + id);
+    return this.http.delete<Items>(`${this.API}/${id}`);
   }
 }
