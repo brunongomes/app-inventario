@@ -6,6 +6,7 @@ import { Items } from '../../../@types/items';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ItemsModalComponent } from '../items-modal/items-modal.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-items-list',
@@ -13,13 +14,14 @@ import { ItemsModalComponent } from '../items-modal/items-modal.component';
   imports: [
     MenuComponent,
     MatTableModule,
-    ItemsModalComponent
+    ItemsModalComponent,
+    MatIconModule
   ],
   templateUrl: './items-list.component.html',
   styleUrl: './items-list.component.css'
 })
 export class ItemsListComponent {
-  displayedColumns: string[] = ['name', 'amount'];
+  displayedColumns: string[] = ['name', 'amount', 'actions'];
   dataSource: Items[] = [];
 
 
