@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Items } from '../../../@types/items';
+import { Item } from '../../../shared/interfaces/items';
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -23,11 +23,11 @@ export class ItemsModalComponent {
   itemAmount: string = '';
   itemDescription: string = '';
   isNewItem: boolean = false;
-  item: { map(arg0: (item: any) => { id: any; name: any; amount: any; }): Items[]; id?: number; name: string; amount: number; description: string; };
+  item: Item;
 
   constructor(
     public dialogRef: MatDialogRef<ItemsModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { item: Items, isNewItem: boolean }
+    @Inject(MAT_DIALOG_DATA) public data: { item: Item, isNewItem: boolean }
   ) {
     this.item = { ...data.item };
     this.isNewItem = data.isNewItem;

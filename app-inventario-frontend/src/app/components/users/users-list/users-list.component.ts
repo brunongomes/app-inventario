@@ -2,19 +2,7 @@ import { Component } from '@angular/core';
 import { MenuComponent } from '../../../shared/menu/menu.component';
 import { MatTableModule } from '@angular/material/table';
 import { UsersService } from '../../../services/users.service';
-import { Users } from '../../../@types/users';
-
-// export interface PeriodicElement {
-//   id: number;
-//   name: string;
-//   email: string;
-//   type: string;
-// }
-
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   {id: 1, name: 'Administrador', email: 'admin@mail.com', type: 'admin'},
-//   {id: 1, name: 'Operador', email: 'operador@mail.com', type: 'operador'}
-// ];
+import { Users } from '../../../shared/interfaces/users';
 
 @Component({
   selector: 'app-users-list',

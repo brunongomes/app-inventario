@@ -1,5 +1,4 @@
-export interface Items {
-    map(arg0: (item: any) => { id: any; name: any; amount: any; }): Items[];
+export interface Item {
     id?: number;
     name: string;
     amount: number;

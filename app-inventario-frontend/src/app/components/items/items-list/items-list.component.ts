@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MenuComponent } from '../../../shared/menu/menu.component';
 import { MatTableModule } from '@angular/material/table';
 import { ItemsService } from '../../../services/items.service';
-import { Items } from '../../../@types/items';
+import { Item } from '../../../shared/interfaces/items';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ItemsModalComponent } from '../items-modal/items-modal.component';
@@ -22,7 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ItemsListComponent {
   displayedColumns: string[] = ['name', 'amount', 'actions'];
-  dataSource: Items[] = [];
+  dataSource: Item[] = [];
 
 
   constructor(private itemsService: ItemsService, private router: Router, private dialog: MatDialog) { }
@@ -38,12 +38,13 @@ export class ItemsListComponent {
   };
 
   loadItems() {
-    this.itemsService.getItems().subscribe(items => {
-      this.dataSource = items.map(item => {
+    this.itemsService.getItems().subscribe((items: any) => {
+      this.dataSource = items.map((item: any): Item => {
         return {
           id: item._id,
           name: item.nome,
-          amount: item.quantidade
+          amount: item.quantidade,
+          description: item.descricao
         };
       });
     });
@@ -66,7 +67,7 @@ export class ItemsListComponent {
     });
   }
 
-  openViewItemDialog(item: Items) {
+  openViewItemDialog(item: Item) {
     const dialogRef = this.dialog.open(ItemsModalComponent, {
       width: '500px',
       data: { item: item, isNewItem: false }
