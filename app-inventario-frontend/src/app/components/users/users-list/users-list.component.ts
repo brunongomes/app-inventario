@@ -3,6 +3,8 @@ import { MenuComponent } from '../../../shared/menu/menu.component';
 import { MatTableModule } from '@angular/material/table';
 import { UsersService } from '../../../services/users.service';
 import { Users } from '../../../shared/interfaces/users';
+import { UsersModalComponent } from '../users-modal/users-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-users-list',
@@ -15,18 +17,18 @@ import { Users } from '../../../shared/interfaces/users';
   styleUrl: './users-list.component.css'
 })
 export class UsersListComponent {
-  displayedColumns: string[] = ['id', 'name', 'email', 'type'];
+  displayedColumns: string[] = ['name', 'email', 'type'];
   dataSource: Users[] = [];
 
 
-  constructor(private usersService: UsersService) { }
+  constructor(private usersService: UsersService, private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.loadItems();
+  }
+
+  loadItems() {
     this.usersService.getUsers().subscribe(users => {
-      console.log(users);
-      if (!users) {
-        return;
-      }
       this.dataSource = users.map((user: { _id: string; nome: string; email: string; tipo: string; }) => {
         return {
           id: user._id,
@@ -35,6 +37,20 @@ export class UsersListComponent {
           type: user.tipo
         };
       })
+    });
+  }
+
+  openAddUserDialog() {
+    const dialogRef = this.dialog.open(UsersModalComponent, {
+      width: '500px',
+      data: { user: {}, isNewUser: true }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      this.usersService.createUser(result.user).subscribe(() => {
+        this.loadItems();
+      });  
     });
   }
 }
