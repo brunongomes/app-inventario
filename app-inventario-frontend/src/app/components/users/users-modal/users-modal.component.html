@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>{{ isNewUser ? 'Novo Usuario' : 'Editar Usuario / Excluir' }}</h2>
+<mat-form-field>
+    <input matInput [(ngModel)]="userName" placeholder="Nome">
+</mat-form-field>
+<mat-form-field>
+    <input matInput [(ngModel)]="userEmail" placeholder="Email">
+</mat-form-field>
+<mat-form-field>
+    <input matInput [(ngModel)]="userLogin" placeholder="Usuário">
+</mat-form-field>
+<mat-form-field>
+    <input matInput [(ngModel)]="userType" placeholder="Tipo">
+</mat-form-field>
+<mat-form-field>
+    <input matInput [(ngModel)]="userPassword" placeholder="Senha">
+</mat-form-field>
+
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="onSave()">Salvar</button>
+    <button mat-button *ngIf="isNewUser" (click)="onCancel()">Cancelar</button>
+    <button mat-button *ngIf="!isNewUser" (click)="onDelete()">Excluir</button>
+</mat-dialog-actions>
+
