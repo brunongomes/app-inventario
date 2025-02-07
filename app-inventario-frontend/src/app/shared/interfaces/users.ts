@@ -5,6 +5,7 @@ export interface Users {
     login: string;
     type: string;
     password: string;
+    confirmPassword?: string;
 }
 
 export interface IUsersResponse {
