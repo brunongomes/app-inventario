@@ -52,18 +52,47 @@ export class ItemsListComponent {
   openAddItemDialog() {
     const dialogRef = this.dialog.open(ItemsModalComponent, {
       width: '500px',
-      data: {}
+      data: { item: {}, isNewItem: true }
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('==>', result);
       if (!result) {
         return;
       }
 
-      this.itemsService.createItem(result).subscribe(() => {
+      this.itemsService.createItem(result.item).subscribe(() => {
         this.loadItems();
       });
+    });
+  }
+
+  openViewItemDialog(item: Items) {
+    const dialogRef = this.dialog.open(ItemsModalComponent, {
+      width: '500px',
+      data: { item: item, isNewItem: false }
+    });
+
+    console.log(item);
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) {
+        return;
+      }
+
+      if (result.action === 'delete') {
+        console.log('ACESSOU A FUNÇÃO DELETE: ', result);
+        this.itemsService.deleteItem(result.item.id).subscribe(() => {
+          this.loadItems();
+        });
+        return;
+      }
+      
+      if (result.action === 'save') {
+        console.log('ACESSOU A FUNÇÃO EDITAR: ', result);
+        this.itemsService.updateItem(result.item).subscribe(() => {
+          this.loadItems();
+        });
+        return;
+      }
     });
   }
 }

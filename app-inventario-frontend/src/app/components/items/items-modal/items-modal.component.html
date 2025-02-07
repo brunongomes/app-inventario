@@ -1,3 +1,4 @@
+<h2 mat-dialog-title>{{ isNewItem ? 'Novo Item' : 'Editar Item / Excluir' }}</h2>
 <mat-form-field>
     <input matInput [(ngModel)]="itemName" placeholder="Nome">
 </mat-form-field>
@@ -11,5 +12,7 @@
 
 <mat-dialog-actions>
     <button mat-button mat-dialog-close (click)="onSave()">Salvar</button>
-    <button mat-button mat-dialog-close cdkFocusInitial>Excluir</button>
+    <button mat-button *ngIf="isNewItem" (click)="onCancel()">Cancelar</button>
+    <button mat-button *ngIf="!isNewItem" (click)="onDelete()">Excluir</button>
 </mat-dialog-actions>
+
