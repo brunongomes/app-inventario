@@ -19,7 +19,7 @@ export class UsersService {
   }
 
   updateUser(user: any): Observable<any> {
-    return this.http.put(this.API, user);
+    return this.http.put(`${this.API}/${user.id}`, user);
   }
 
   deleteUser(id: any): Observable<any> {
