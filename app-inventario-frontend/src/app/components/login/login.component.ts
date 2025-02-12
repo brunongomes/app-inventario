@@ -28,7 +28,7 @@ export class LoginComponent {
 
     this.loginService.makeLogin(loginData).subscribe(response => {
       localStorage.setItem('authToken', response.token);
-      this.router.navigate(['/items']);
+      this.router.navigate(['/itens']);
       // localStorage.getItem('authToken'); // capturar token
       // localStorage.removeItem('authToken'); // remover token
     }, error => {
